@@ -33,13 +33,18 @@ export default function ProductSelect({ prodId, setProdId }) {
 
     const mountProduct = () => {
         let total = 0
-        prodId.map((productCar) => {
-            let myProduct = Products.filter((product) =>
-                product.id === productCar
-            );
-            total = total + myProduct[0].price.amount;
-            setTotalProducts(total.toFixed(2));
-        });
+
+        if (prodId.length!==0) {
+            prodId.map((productCar) => {
+                let myProduct = Products.filter((product) =>
+                    product.id === productCar
+                );
+                total = total + myProduct[0].price.amount;
+                setTotalProducts(total.toFixed(2));
+            });
+        }else{
+            setTotalProducts(0);
+        }
     }
 
     const handleButtonDelete = (id) => {
@@ -62,9 +67,9 @@ export default function ProductSelect({ prodId, setProdId }) {
                 {loading && <p className="animate__animated animate__flash text-white">Loanding</p>}
                 {
                     cartProducts.map(p =>
-                        <div 
-                        className="max-w-sm rounded overflow-hidden shadow-lg relative m-2" 
-                        key={p.id}>
+                        <div
+                            className="max-w-sm rounded overflow-hidden shadow-lg relative m-2"
+                            key={p.id}>
                             <div className="flex flex-wrap bg-blue-200">
                                 <div className="w-2/5 ">
                                     <img
@@ -74,13 +79,13 @@ export default function ProductSelect({ prodId, setProdId }) {
                                 </div>
                                 <div className="w-3/5 p-2">
                                     <div className="font-bold text-sm mb-2">
-                                    <span className="text-blue-600 text-lg">{p.cantidad} </span>
+                                        <span className="text-blue-600 text-lg">{p.cantidad} </span>
                                         <span className="text-blue-600 text-md">
-                                             x  
+                                            x
                                         </span> {p.name}
                                     </div>
                                     <p className="text-blue-600 text-base">
-                                        <span>{(p.price.amount*p.cantidad).toFixed(2)} </span>
+                                        <span>{(p.price.amount * p.cantidad).toFixed(2)} </span>
                                         <span> {p.price.currency} </span>
                                     </p>
                                 </div>
