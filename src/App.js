@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react';
+import ProductList from "./components/ProductList";
+import ProductSelect from "./components/ProductSelect";
+
 
 function App() {
+  const [prodId, setProdId] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-wrap">
+      <div className="md:w-4/5 w-full text-center">
+        <ProductList setProdId={setProdId} />
+        <div className="md:h-1 h-48"></div>
+      </div>
+      <div 
+      className="md:w-1/5 fixed md:relative bottom-0 w-full shadow-2xl bg-blue-600 overflow-y-auto md:h-auto h-48 ">
+        <ProductSelect prodId={prodId} setProdId={setProdId} />
+      </div>
     </div>
   );
 }
